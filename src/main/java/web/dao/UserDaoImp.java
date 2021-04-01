@@ -1,48 +1,48 @@
 package web.dao;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 import web.model.User;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
-@Component
+@Repository
 public class UserDaoImp implements UserDao{
-    private static long USER_COUNT;
-    private final List<User> users;
 
-    {
-        users = new ArrayList<>();
-
-        users.add(new User(++USER_COUNT,"Jessy", "PinkMan"));
-        users.add(new User(++USER_COUNT,"Frank", "Gallagher"));
-        users.add(new User(++USER_COUNT,"Fiona", "Gallagher"));
-        users.add(new User(++USER_COUNT,"Mickey", "Milkovich"));
-    }
+    @PersistenceContext(unitName = "entityManagerFactory")
+    @Autowired
+    private EntityManager entityManager;
 
     @Override
     public List<User> getAllUsers() {
-        return users;
+        List<User> allUsers = entityManager.createQuery("from User", User.class).getResultList();
+        return allUsers;
     }
 
     @Override
     public User getById(long id) {//show
-        return users.stream().filter(user -> user.getId() == id).findAny().orElse(null);
+        return (User) entityManager.createQuery("from User where id =:id")
+                .setParameter("id", id).getSingleResult();
     }
 
     @Override
     public void add(User user) {
-        user.setId(++USER_COUNT);
-        users.add(user);
+        entityManager.persist(user);
     }
 
     @Override
-    public void delete(User user) {
+    public void delete(long id) {
+        entityManager.remove(getById(id));
     }
 
     @Override
-    public void edit(long id) {
-        //return people.stream().filter(person -> person.getId() == id).findAny().orElse(null);
+    public void edit(User user) {
+        entityManager.merge(user);
     }
 
 }

@@ -1,16 +1,52 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en"  xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>All Users</title>
+    <style>
+        .text {
+            text-align:  center;
+        }
+        table {
+            width: 300px; /* Ширина таблицы */
+            border: 1px solid black; /* Рамка вокруг таблицы */
+            margin: auto; /* Выравниваем таблицу по центру окна  */
+        }
+        td {
+            text-align: center; /* Выравниваем текст по центру ячейки */
+        }
+        th {
+            font-weight: 600;
+        }
+    </style>
 </head>
 <body>
-    <h2>USERS</h2>
+    <h2 class="text">USERS</h2>
 
-    <div th:each="user : ${users}">
-        <a th:href="@{/{id}(id=${user.getId()})}" th:text="${user.getName()} ">userName</a>
-        <a th:href="@{/{id}(id=${user.getId()})}" th:text="${user.getSurName()}">userSurName</a>
-    </div>
+    <table class="text">
+        <tr class="text">
+            <th>ID</th>
+            <th>Name</th>
+            <th>Surname</th>
+            <th></th>
+        </tr>
+        <tr th:each="user : ${users}">
+            <td th:text="${user.id}">id</td>
+            <td th:text="${user.name}">name</td>
+            <td th:text="${user.surName}">lastName</td>
+            <td>
+                <a th:href="@{edit?id=} + ${user.id}">Edit</a>
+            </td>
+            <td>
+                <a th:href="@{delete?id=} + ${user.id}">Delete</a>
+            </td>
+        </tr>
+    </table>
 
+    <br>
+
+    <form class="text" action="add-user.html" target="_blank">
+        <button>Add User</button>
+    </form>
 </body>
 </html>

@@ -1,15 +1,23 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <style>
+        .text {
+            text-align:  center;
+        }
+    </style>
 </head>
 <body>
-<div>
+<div class="text">
     <th:block th:each="msg : ${messages}">
         <h1 th:text="${msg}"></h1>
     </th:block>
+
+<form action="all-users.html" target="_blank">
+    <button>All Users</button>
+</form>
 </div>
 </body>
 </html>

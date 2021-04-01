@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add User</title>
+    <style>
+        .text {
+            text-align:  center;
+        }
+        table {
+            width: 300px; /* Ширина таблицы */
+            border: 1px solid black; /* Рамка вокруг таблицы */
+            margin: auto; /* Выравниваем таблицу по центру окна  */
+        }
+    </style>
+</head>
+<body> <!--Страница для добавления юзера-->
+    <h2 class="text">Add User</h2>
+
+    <form action="/save" method="POST" modelAttribute="user">
+        <table>
+            <tr>
+                <td>Name</td>
+                <td><label for="name"></label><input type="text" id="name" name="name" value=""/></td>
+            </tr>
+            <tr>
+                <td>Last Name</td>
+                <td><label for="surName"></label><input type="text" id="surName" name="surName" value=""/></td>
+            </tr>
+            <tr align="center">
+                <td colspan="2"><input type="submit" value="Save"/></td>
+            </tr>
+        </table>
+    </form>
+
+</body>
+</html>

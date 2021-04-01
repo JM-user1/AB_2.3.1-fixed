@@ -1145,7 +1145,7 @@ SELECT|sys.sys_config:null
     <view id="361" parent="2" name="VIEW_TABLE_USAGE">
       <System>1</System>
     </view>
-    <table id="362" parent="3" name="persons">
+    <table id="362" parent="3" name="user">
       <Engine>MyISAM</Engine>
     </table>
     <column id="363" parent="283" name="USER">
